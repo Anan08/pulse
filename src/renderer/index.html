@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="backdrop" class="backdrop">
+    <div id="spotlight-wrap" class="spotlight-wrap">
+      <div id="assistant-message" class="assistant-message">What should we do today?</div>
+
+      <div id="spotlight-card" class="spotlight-card">
+        <div class="input-row">
+          <span class="search-icon" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input
+            id="prompt-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Ask Pulse or open any project or app..."
+          />
+          <button id="tasks-btn" class="tasks-btn" type="button" title="Monitor background services and logs">
+            <span id="tasks-btn-dot" class="tasks-dot hidden"></span>
+            <span id="tasks-btn-label">Tasks</span>
+          </button>
+          <button id="model-selector-btn" class="model-btn" type="button" title="Switch AGY model">
+            <span id="model-selector-label">Gemini 3.8 Flash (Low)</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div id="model-menu" class="model-menu hidden">
+          <div id="model-menu-list" class="model-menu-list"></div>
+        </div>
+
+        <div id="results-panel" class="results-panel hidden">
+          <div id="results-list" class="results-list"></div>
+        </div>
+
+        <div id="chat-panel" class="chat-panel hidden">
+          <div class="chat-header">
+            <span id="chat-status" class="chat-status">Conversation</span>
+            <button id="clear-chat-btn" class="text-btn" type="button">New chat</button>
+          </div>
+          <div id="chat-thread" class="chat-thread"></div>
+        </div>
+
+        <div id="tasks-panel" class="tasks-panel hidden">
+          <div class="tasks-header">
+            <span id="tasks-summary" class="tasks-summary">Background Tasks</span>
+            <div class="tasks-header-actions">
+              <button id="refresh-tasks-btn" class="text-btn" type="button">Refresh</button>
+              <button id="close-tasks-btn" class="text-btn" type="button">Done</button>
+            </div>
+          </div>
+
+          <div id="tasks-list" class="tasks-list"></div>
+
+          <div id="task-log-viewer" class="task-log-viewer hidden">
+            <div class="task-log-header">
+              <span id="task-log-title" class="task-log-title">Logs</span>
+              <div class="tasks-header-actions">
+                <button id="refresh-log-btn" class="text-btn" type="button">Refresh log</button>
+                <button id="rerun-log-task-btn" class="text-btn" type="button">Rerun</button>
+              </div>
+            </div>
+            <pre id="task-log-output" class="task-log-output"></pre>
+          </div>
+        </div>
+
+        <div id="settings-panel" class="settings-panel hidden">
+          <div class="settings-header">
+            <span class="settings-heading">Settings</span>
+            <button id="close-settings-btn" class="text-btn" type="button">Done</button>
+          </div>
+
+          <div class="settings-body">
+            <label class="toggle-row">
+              <div>
+                <div class="setting-title">Launch on Windows startup</div>
+                <div class="setting-desc">Open automatically on login with boot-protected focus</div>
+              </div>
+              <input id="setting-startup" type="checkbox" />
+            </label>
+
+            <label class="toggle-row">
+              <div>
+                <div class="setting-title">Auto-hide when clicking outside</div>
+                <div class="setting-desc">Dismiss when focus moves to another window</div>
+              </div>
+              <input id="setting-autohide" type="checkbox" />
+            </label>
+
+            <div class="setting-field">
+              <label for="setting-ai-provider">AI Provider</label>
+              <select id="setting-ai-provider">
+                <option value="agy">Built-in Antigravity (agy CLI)</option>
+                <option value="gemini">Google Gemini API Key</option>
+                <option value="openai">OpenAI API Key</option>
+              </select>
+            </div>
+
+            <div id="agy-model-row" class="setting-field">
+              <label for="setting-agy-model">AGY Model</label>
+              <select id="setting-agy-model"></select>
+            </div>
+
+            <div id="api-key-row" class="setting-field hidden">
+              <label for="setting-api-key">API Key</label>
+              <input id="setting-api-key" type="password" placeholder="Paste API key..." />
+            </div>
+
+            <div class="setting-field">
+              <div class="setting-row-head">
+                <label for="setting-roots">Workspace Roots</label>
+                <button id="rescan-btn" class="text-btn" type="button">Rescan</button>
+              </div>
+              <textarea id="setting-roots" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="settings-footer">
+            <span id="settings-feedback" class="settings-feedback"></span>
+            <button id="save-settings-btn" class="primary-btn" type="button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "pulse",
+  "version": "1.0.0",
+  "description": "Windows Startup Floating Spotlight Automation App",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/verify.js",
+    "startup:enable": "node src/cli-startup.js enable",
+    "startup:disable": "node src/cli-startup.js disable",
+    "startup:status": "node src/cli-startup.js status"
+  },
+  "keywords": [
+    "automation",
+    "spotlight",
+    "launcher",
+    "electron",
+    "windows"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^45.4.1"
+  }
+}
